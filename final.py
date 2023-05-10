@@ -3,7 +3,6 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 stack_std = []
-stt = 0
 #Chuan hao xau
 def CHX(st):
     st = st.title()
@@ -22,11 +21,8 @@ while (1 != 2):
         break
 
     row_list = row.split(",")
-    row_list[4] = float(row_list[4].strip())
-    row_list[2] = row_list[2].strip()
-    row_list[3] = row_list[3].strip()
+    row_list[4] = float(row_list[4])
     stack_std.append([row_list[0], CHX(row_list[1]), row_list[2], row_list[3], row_list[4]])
-    stt +=1
 # Ghi ra file
 
 
@@ -56,20 +52,21 @@ def add_student():
     Class = str(input("Class: "))
     year_brith = int(input("Year of birh: "))
     GPA = float(input("Grade point average: "))
-    stack_std.append([student_id, CHX(name), Class, year_brith, GPA])
-    stt += 1
+    stack_std.append([student_id, CHX(name), Class, year_brith.strip(), GPA])
 # Display all of students
 
 
 def display_students(stack):
-    print("\t\t\t+-----|---------+-----------------------+------------+-------------+-------*")
+    print("\t\t\t+-----+----------+-----------------------+------------+-------------+-------*")
     print("\t\t\t|%-5s|%-10s|%-23s|%-12s|%-13s|%-7s|" %
-          ("Student_ID", "           Name", "   Class", "Year of birth", "  GPA"))
+          (" No ","Student_ID", "           Name", "   Class", "Year of birth", "  GPA"))
     print("\t\t\t+-----|----------+-----------------------+------------+-------------+-------|")
+    stt = 0
     for sv in stack:
+        stt +=1
         print("\t\t\t|%-5s|%-10s|%-23s|%-12s|%-13s|%-7s|" %
-              (str(stt),sv[0], sv[1], sv[2], sv[3], str(sv[4])))
-    print("\t\t\t*----------+-----------------------+------------+-------------+-------*")
+              (str(stt),sv[0], sv[1], "  "+ sv[2], "   " + sv[3], str(sv[4])))
+    print("\t\t\t+-----|---------+-----------------------+------------+-------------+-------*")
 
 # DELETE
 
@@ -173,9 +170,16 @@ def AVG_GPA(data, Class):
         mean[i] = round(mean[i]/dem[i], 2)
     return mean
 
+def sort(x, y):
+    for i in range(len(x)-1):
+        for j in range(i+1, len(x)):
+            if x[i] < x[j]:
+                x[i], x[j] = x[j], x[i]
+                y[i], y[j] = y[j], y[i]
 
 def SHOW(X, Y):
     plt.bar(x=X, height=Y, color='blue')
+    plt.xticks(rotation = 10)
     plt.xlabel('Class', size=14)
     plt.ylabel('Average GPA', size=14)
     plt.grid(axis='y', linestyle='--')
@@ -220,6 +224,7 @@ while (1 != 0):
             if pick == 1:
                 os.system('cls')
                 name = input("Enter the name of the student you want to search for: ")
+                name = CHX(name)
                 filtered_list = filter(lambda x: search_name(name, x[1]) == True, stack_std)
                 display_students(filtered_list)
                 input("ENTER")
@@ -280,6 +285,7 @@ while (1 != 0):
     elif choice == 7:
         Class = subclass(stack_std)
         Average_point = AVG_GPA(stack_std, Class)
+        sort(Average_point,Class)
         SHOW(Class, Average_point)
 
     elif choice == 8:
