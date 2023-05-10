@@ -53,9 +53,7 @@ def display_students(stack):
                  (sv[0], sv[1], sv[2], sv[3], str(sv[4])))
     print("\t\t\t*----------+------------------+------------+-------------+-------*")
 
-
 # Thuat toan sap xep
-
 def quicksort_up(data):
     if len(data) <= 1:
         return data
@@ -171,7 +169,8 @@ while (1 != 0):
             print("1: Search by name")
             print("2: search by Student ID")
             print("3: Search by GPA")
-            print("4: EXIT")
+            print("4: Search by class")
+            print("5: EXIT")
             pick = int(input("Enter choice: "))
             if pick == 1:
                 os.system('cls')
@@ -191,7 +190,15 @@ while (1 != 0):
                 filtered_list = search_GPA(stack_std,Point)
                 print(display_students(filtered_list))
                 input("ENTER")
-            elif pick == 4:
+            elif pick ==4:
+                os.system("cls")
+                cl = input("Enter CLASS you want to search for: ")
+                filtered_list = []
+                filtered_list = filter(lambda x: x[2] == cl,stack_std)
+                filtered_list = sort_name(filtered_list, compare_last_name)
+                display_students(filtered_list)
+                input("ENTER")
+            elif pick == 5:
                 break
 
     elif choice == 6:
