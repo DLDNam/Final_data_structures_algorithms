@@ -193,8 +193,8 @@ while (1 != 0):
             elif pick ==4:
                 os.system("cls")
                 cl = input("Enter CLASS you want to search for: ")
-                filtered_list = []
                 filtered_list = filter(lambda x: x[2] == cl,stack_std)
+                filtered_list = list(filtered_list) 
                 filtered_list = sort_name(filtered_list, compare_last_name)
                 display_students(filtered_list)
                 input("ENTER")
