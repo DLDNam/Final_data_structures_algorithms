@@ -19,8 +19,7 @@ while (1 != 2):
     row = file_data.readline()
     if row == "":
         break
-
-    row_list = row.split(",")
+    row_list = row.strip().split(",")
     row_list[4] = float(row_list[4])
     stack_std.append([row_list[0], CHX(row_list[1]), row_list[2], row_list[3], row_list[4]])
 # Ghi ra file
@@ -230,8 +229,7 @@ while (1 != 0):
             
             elif pick == 2:
                 os.system("cls")
-                ID = input(
-                    "Enter the Student_ID of the student you want to search for: ")
+                ID = input("Enter the Student_ID of the student you want to search for: ").strip()
                 filtered_list = filter(lambda x: x[0] == ID, stack_std)
                 display_students(filtered_list)
                 input("ENTER")
@@ -245,7 +243,7 @@ while (1 != 0):
             
             elif pick == 4:
                 os.system("cls")
-                cl = input("Enter CLASS you want to search for: ")
+                cl = input("Enter CLASS you want to search for: ").strip()
                 filtered_list = filter(lambda x: x[2] == cl, stack_std)
                 filtered_list = list(filtered_list)
                 filtered_list = sort_name(filtered_list, compare_last_name)
