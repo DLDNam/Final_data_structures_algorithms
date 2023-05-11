@@ -179,7 +179,6 @@ def sort(x, y):
 
 def SHOW(X, Y):
     plt.bar(x=X, height=Y, color='blue')
-    plt.xticks(rotation = 10)
     plt.xlabel('Class', size=14)
     plt.ylabel('Average GPA', size=14)
     plt.grid(axis='y', linestyle='--')
