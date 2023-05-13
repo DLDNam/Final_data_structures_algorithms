@@ -1,8 +1,11 @@
+# Student Management System
+# Nember: Dinh Le Duc Nam, Dinh Quang Tung
+# Topic Idea: 
 import os
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-stack_std = []
+student_list = []
 #Chuan hao xau
 def CHX(st):
     st = st.title()
@@ -21,13 +24,12 @@ while (1 != 2):
         break
     row_list = row.strip().split(",")
     row_list[4] = float(row_list[4])
-    stack_std.append([row_list[0], CHX(row_list[1]), row_list[2], row_list[3], row_list[4]])
+    student_list.append([row_list[0], CHX(row_list[1]), row_list[2], row_list[3], row_list[4]])
+
 # Ghi ra file
-
-
 def write_file():
     with open('Datastudent.txt', 'w') as file_data:
-        for sv in stack_std:
+        for sv in student_list:
             file_data.write(str(sv[0]) + "," + str(CHX(sv[1])) + "," +
                             str(sv[2]) + "," + str(sv[3]) + "," + str(sv[4]) + "\n")
 
@@ -42,7 +44,6 @@ def menu():
     print("7: CHART OF AVERAGE GPA BY CLASS")
     print("8: EXIT")
 
-
 # Them Sinh Vien
 
 def add_student():
@@ -51,7 +52,7 @@ def add_student():
     Class = str(input("Class: "))
     year_brith = int(input("Year of birh: "))
     GPA = float(input("Grade point average: "))
-    stack_std.append([student_id, CHX(name), Class, year_brith.strip(), GPA])
+    student_list.append([student_id, CHX(name), Class, year_brith.strip(), GPA])
 # Display all of students
 
 
@@ -94,8 +95,6 @@ def search_GPA(data, p):
     return tam
 
 # Thuat toan sap xep
-
-
 def quicksort_up(data):
     if len(data) <= 1:
         return data
@@ -104,7 +103,6 @@ def quicksort_up(data):
         right = [sv for sv in data[1:] if sv[4] > pivot[4]]
         left = [sv for sv in data[1:] if sv[4] <= pivot[4]]
         return quicksort_up(left) + [pivot] + quicksort_up(right)
-
 
 def quicksort_down(data):
     if len(data) <= 1:
@@ -179,6 +177,7 @@ def sort(x, y):
 def SHOW(X, Y):
     plt.bar(x=X, height=Y, color='blue')
     plt.xlabel('Class', size=14)
+    plt.xticks(rotation = 5)
     plt.ylabel('Average GPA', size=14)
     plt.grid(axis='y', linestyle='--')
     plt.gcf().set_size_inches(12, 6)
@@ -198,15 +197,15 @@ while (1 != 0):
         input("Added successfully")
 
     elif choice == 2:
-        display_students(stack_std)
+        display_students(student_list)
         input("ENTER")
 
     elif choice == 3:
         os.system("cls")
         std_ID = input("Enter the student ID to remove from the list: ")
-        kt = len(stack_std)
-        stack_std = Delete(stack_std, std_ID)
-        if kt == len(stack_std):
+        kt = len(student_list)
+        student_list = Delete(student_list, std_ID)
+        if kt == len(student_list):
             input("There is no student with that student ID")
         else:
             input("Delete successfully")
@@ -223,28 +222,28 @@ while (1 != 0):
                 os.system('cls')
                 name = input("Enter the name of the student you want to search for: ")
                 name = CHX(name)
-                filtered_list = filter(lambda x: search_name(name, x[1]) == True, stack_std)
+                filtered_list = filter(lambda x: search_name(name, x[1]) == True, student_list)
                 display_students(filtered_list)
                 input("ENTER")
             
             elif pick == 2:
                 os.system("cls")
                 ID = input("Enter the Student_ID of the student you want to search for: ").strip()
-                filtered_list = filter(lambda x: x[0] == ID, stack_std)
+                filtered_list = filter(lambda x: x[0] == ID, student_list)
                 display_students(filtered_list)
                 input("ENTER")
             
             elif pick == 3:
                 os.system("cls")
                 Point = float(input("Enter GPA you want to search for: "))
-                filtered_list = search_GPA(stack_std, Point)
+                filtered_list = search_GPA(student_list, Point)
                 print(display_students(filtered_list))
                 input("ENTER")
             
             elif pick == 4:
                 os.system("cls")
                 cl = input("Enter CLASS you want to search for: ").strip()
-                filtered_list = filter(lambda x: x[2] == cl, stack_std)
+                filtered_list = filter(lambda x: x[2] == cl, student_list)
                 filtered_list = list(filtered_list)
                 filtered_list = sort_name(filtered_list, compare_last_name)
                 display_students(filtered_list)
@@ -262,26 +261,26 @@ while (1 != 0):
             print("4: EXIT")
             pick = int(input("Enter choice: "))
             if pick == 1:
-                stack_std = quicksort_up(stack_std)
-                display_students(stack_std)
+                student_list = quicksort_up(student_list)
+                display_students(student_list)
                 input("ENTER")
             
             elif pick == 2:
-                stack_std = quicksort_down(stack_std)
-                display_students(stack_std)
+                student_list = quicksort_down(student_list)
+                display_students(student_list)
                 input("ENTER")
             
             elif pick == 3:
-                stack_std = sort_name(stack_std, compare_last_name)
-                display_students(stack_std)
+                student_list = sort_name(student_list, compare_last_name)
+                display_students(student_list)
                 input("ENTER")
             
             elif pick == 4:
                 break
 
     elif choice == 7:
-        Class = subclass(stack_std)
-        Average_point = AVG_GPA(stack_std, Class)
+        Class = subclass(student_list)
+        Average_point = AVG_GPA(student_list, Class)
         sort(Average_point,Class)
         SHOW(Class, Average_point)
 
