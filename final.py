@@ -70,7 +70,7 @@ def display_students(stack):
 
 # DELETE
 
-
+ 
 def Delete(data, ID):
     filter = [sv for sv in data if sv[0] != ID]
     return filter
@@ -107,7 +107,7 @@ def quicksort_up(data):
 def quicksort_down(data):
     if len(data) <= 1:
         return data
-    else:
+    else:     
         pivot = data[0]
         less = [sv for sv in data[1:] if sv[4] < pivot[4]]
         greater = [sv for sv in data[1:] if sv[4] >= pivot[4]]
