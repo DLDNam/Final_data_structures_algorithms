@@ -6,6 +6,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 student_list = []
+
 #Chuan hao xau
 def CHX(st):
     st = st.title()
@@ -45,7 +46,6 @@ def menu():
     print("8: EXIT")
 
 # Them Sinh Vien
-
 def add_student():
     student_id = str(input("Student ID: "))
     name = str(input("Name: "))
@@ -53,9 +53,8 @@ def add_student():
     year_brith = int(input("Year of birh: "))
     GPA = float(input("Grade point average: "))
     student_list.append([student_id, CHX(name), Class, year_brith.strip(), GPA])
+
 # Display all of students
-
-
 def display_students(stack):
     print("\t\t\t+-----+----------+-----------------------+------------+-------------+-------*")
     print("\t\t\t|%-5s|%-10s|%-23s|%-12s|%-13s|%-7s|" %
@@ -69,15 +68,11 @@ def display_students(stack):
     print("\t\t\t+-----|---------+-----------------------+------------+-------------+-------*")
 
 # DELETE
-
- 
 def Delete(data, ID):
     filter = [sv for sv in data if sv[0] != ID]
     return filter
 
 # search by name
-
-
 def search_name(name, st):
     name = name.lower()
     st = st.lower()
@@ -85,7 +80,6 @@ def search_name(name, st):
         return True
     else:
         return False
-
 
 def search_GPA(data, p):
     tam = []
@@ -113,39 +107,7 @@ def quicksort_down(data):
         greater = [sv for sv in data[1:] if sv[4] >= pivot[4]]
         return quicksort_down(greater) + [pivot] + quicksort_down(less)
 
-
-def split_name(name):
-    name = str(name.lower())
-    last_name = name.split(" ")
-    return last_name[-1]
-
-
-def sort_name(data, compare_func):
-    if len(data) <= 1:
-        return data
-    else:
-        pivot = data[0]
-        less = []
-        equal = []
-        greater = []
-        for element in data:
-            if compare_func(element, pivot) < 0:
-                less.append(element)
-            elif compare_func(element, pivot) == 0:
-                equal.append(element)
-            else:
-                greater.append(element)
-        return sort_name(less, compare_func) + equal + sort_name(greater, compare_func)
-
-
-def compare_last_name(student1, student2):
-    last_name1 = split_name(student1[1])
-    last_name2 = split_name(student2[1])
-    return 1 if last_name1 > last_name2 else -1 if last_name1 < last_name2 else 0
-
 # vẽ biểu đồ
-
-
 def subclass(data):
     lop = []
     for cl in data:
@@ -209,6 +171,7 @@ while (1 != 0):
             input("There is no student with that student ID")
         else:
             input("Delete successfully")
+    
     elif choice == 5:
         while (1 != 0):
             os.system('cls')
@@ -245,7 +208,6 @@ while (1 != 0):
                 cl = input("Enter CLASS you want to search for: ").strip()
                 filtered_list = filter(lambda x: x[2] == cl, student_list)
                 filtered_list = list(filtered_list)
-                filtered_list = sort_name(filtered_list, compare_last_name)
                 display_students(filtered_list)
                 input("ENTER")
             
@@ -257,8 +219,7 @@ while (1 != 0):
             os.system("cls")
             print("1: Sort by increasing GPA")
             print("2: Sort by decreasing GPA")
-            print("3: Sort by name from A to Z")
-            print("4: EXIT")
+            print("3: EXIT")
             pick = int(input("Enter choice: "))
             if pick == 1:
                 student_list = quicksort_up(student_list)
@@ -269,13 +230,7 @@ while (1 != 0):
                 student_list = quicksort_down(student_list)
                 display_students(student_list)
                 input("ENTER")
-            
             elif pick == 3:
-                student_list = sort_name(student_list, compare_last_name)
-                display_students(student_list)
-                input("ENTER")
-            
-            elif pick == 4:
                 break
 
     elif choice == 7:
