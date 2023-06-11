@@ -76,8 +76,6 @@ def Delete(data, ID):
     return filter
 
 # search by name
-
-
 def search_name(name, st):
     name = name.lower()
     st = st.lower()
@@ -114,10 +112,10 @@ def quicksort_down(data):
         return quicksort_down(greater) + [pivot] + quicksort_down(less)
 
 
-def split_name(name):
+def split_name(name,n):
     name = str(name.lower())
     last_name = name.split(" ")
-    return last_name[-1]
+    return last_name[n]
 
 
 def sort_name(data, compare_func):
@@ -137,14 +135,30 @@ def sort_name(data, compare_func):
                 greater.append(element)
         return sort_name(less, compare_func) + equal + sort_name(greater, compare_func)
 
-
 def compare_last_name(student1, student2):
-    last_name1 = split_name(student1[1])
-    last_name2 = split_name(student2[1])
-    return 1 if last_name1 > last_name2 else -1 if last_name1 < last_name2 else 0
+    if student1[1] == student2[1]:
+        return 0
+    name1 = split_name(student1[1],-1)
+    name2 = split_name(student2[1],-1)
+    if name1 > name2:
+        return 1
+    elif name2 < name1:
+        return -1
+    space = 0
+    num_space1 = student1[1].count(" ")
+    num_space2 = student2[1].count(" ")
+    while (space < num_space1) and (space < num_space2):
+        name1 = split_name(student1[1],space)
+        name2 = split_name(student2[1],space)
+        if name1 > name2:
+            return 1
+        elif name1 < name2:
+            return -1
+        else:
+            space = space + 1
+    return 0
 
 # vẽ biểu đồ
-
 
 def subclass(data):
     lop = []
