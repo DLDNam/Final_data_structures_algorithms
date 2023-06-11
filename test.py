@@ -1,34 +1,39 @@
-import os
-import matplotlib as mpl
-import matplotlib.pyplot as plt
+def Nhap_danh_sach_ten():
+    """
+    :return: List of name is string
+    """
+    list_name = []
+    n = int(input("Nhap vao so luong ten: n = "))
+    print("Nhap vao danh sach cac ten:")
+    for i in range(n):
+        print("\tSo thu tu ", i+1, ":", sep="", end=" ")
+        list_name.append(input())
 
-student_list = []
-#Chuan hao xau
-def CHX(st):
-    st = st.title()
-    st = st.strip()
-    kt = "  "
-    while kt in st:
-        st = st.replace("  "," ")
-    return st
-
-
-# dọc file
-file_data = open("Datastudent.txt", mode="r")
-while (1 != 2):
-    row = file_data.readline()
-    if row == "":
-        break
-    row_list = row.strip().split(",")
-    row_list[4] = float(row_list[4])
-    student_list.append([row_list[0], CHX(row_list[1]), row_list[2], row_list[3], row_list[4]])
-# Ghi ra file
+    return list_name
 
 
-def write_file():
-    with open('Datastudent.txt', 'w') as file_data:
-        for sv in student_list:
-            file_data.write(str(sv[0]) + "," + str(CHX(sv[1])) + "," +
-                            str(sv[2]) + "," + str(sv[3]) + "," + str(sv[4]) + "\n")
+def Sap_xep_Abc(lst):
+    """
+    :param lst: list of name is string
+    :return: void
+    """
+    for i in range(len(lst) - 1):
+        for j in range(i + 1, len(lst)):
+            if lst[i] > lst[j]:
+                lst[i], lst[j] = lst[j], lst[i]
 
-print(student_list[1][1])
+
+# Chuong trinh chinh
+lst = Nhap_danh_sach_ten()
+
+# Hien thi
+print("Danh sach vua nhap la:")
+for i in range(len(lst)):
+    print("\t", lst[i], end=" ")
+
+# Sap xep tang dan
+Sap_xep_Abc(lst)
+
+print("\nDanh sach sau khi sap xep la:")
+for i in range(len(lst)):
+    print("\t", lst[i], end=" ")
