@@ -69,12 +69,13 @@ def display_students(stack):
     print("\t\t\t+-----|---------+-----------------------+------------+-------------+-------*")
 
 # DELETE
-
- 
 def Delete(data, ID):
     filter = [sv for sv in data if sv[0] != ID]
     return filter
 
+# #UPDATE
+# def Update(data, ID):
+#     if 
 # search by name
 def search_name(name, st):
     name = name.lower()
@@ -117,7 +118,6 @@ def split_name(name,n):
     last_name = name.split(" ")
     return last_name[n]
 
-
 def sort_name(data, compare_func):
     if len(data) <= 1:
         return data
@@ -159,7 +159,6 @@ def compare_last_name(student1, student2):
     return 0
 
 # vẽ biểu đồ
-
 def subclass(data):
     lop = []
     for cl in data:
@@ -199,7 +198,6 @@ def SHOW(X, Y):
     for i in range(len(X)):
         plt.annotate((Y[i]), xy=(X[i], (Y[i])), ha='center', va='bottom')
     plt.show()
-
 
 # MAIN PROGAMING
 while (1 != 0):
