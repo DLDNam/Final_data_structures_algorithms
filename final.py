@@ -35,17 +35,22 @@ def write_file():
 
 
 def menu():
-    print("1: ADD")
-    print("2: THE DISPLAY ALL OF STUDENTS")
-    print("3: DELETE")
-    print("4: UPDATE")
-    print("5: SEARCH")
-    print("6: SORT")
-    print("7: CHART OF AVERAGE GPA BY CLASS")
-    print("8: EXIT")
+    print("*****************************************************")
+    print("*                                                   *")
+    print("*      WELCOME TO THE STUDENT MANAGEMENT SYSTEM     *")
+    print("*                                                   *")
+    print("*****************************************************")
+    print("*         1: ADD                                    *")
+    print("*         2: THE DISPLAY ALL OF STUDENTS            *")
+    print("*         3: DELETE                                 *")
+    print("*         4: UPDATE                                 *")
+    print("*         5: SEARCH                                 *")
+    print("*         6: SORT                                   *")
+    print("*         7: CHART OF AVERAGE GPA BY CLASS          *")
+    print("*         8: EXIT                                   *")
+    print("*****************************************************")
 
 # Them Sinh Vien
-
 def add_student():
     student_id = str(input("Student ID: "))
     name = str(input("Name: "))
@@ -53,9 +58,8 @@ def add_student():
     year_brith = int(input("Year of birh: "))
     GPA = float(input("Grade point average: "))
     student_list.append([student_id, CHX(name), Class, year_brith.strip(), GPA])
+
 # Display all of students
-
-
 def display_students(stack):
     print("\t\t\t+-----+----------+-----------------------+------------+-------------+-------*")
     print("\t\t\t|%-5s|%-10s|%-23s|%-12s|%-13s|%-7s|" %
@@ -66,17 +70,29 @@ def display_students(stack):
         stt +=1
         print("\t\t\t|%-5s|%-10s|%-23s|%-12s|%-13s|%-7s|" %
               (str(stt),sv[0], sv[1], "  "+ sv[2], "   " + sv[3], str(sv[4])))
-    print("\t\t\t+-----|---------+-----------------------+------------+-------------+-------*")
+    print("\t\t\t+-----|----------+-----------------------+------------+-------------+-------*")
 
 # DELETE
 def Delete(data, ID):
     filter = [sv for sv in data if sv[0] != ID]
     return filter
 
-# #UPDATE
-# def Update(data, ID):
-#     if 
-# search by name
+#UPDATE 
+def Update(data, ID, kt):
+    for sv in data:
+        if sv[0] == ID:
+            row = []
+            row.append(sv)
+            display_students(row)
+            kt = True
+            sv[0] = str(input("Student ID: "))
+            sv[1] = str(input("Name: "))        
+            sv[2] = int(input("Year of birh: "))
+            sv[3] = float(input("Grade point average: "))
+            break
+
+
+#SEARCH
 def search_name(name, st):
     name = name.lower()
     st = st.lower()
@@ -112,7 +128,7 @@ def quicksort_down(data):
         greater = [sv for sv in data[1:] if sv[4] >= pivot[4]]
         return quicksort_down(greater) + [pivot] + quicksort_down(less)
 
-
+#Sort theo A_Z
 def split_name(name,n):
     name = str(name.lower())
     last_name = name.split(" ")
@@ -221,6 +237,17 @@ while (1 != 0):
             input("There is no student with that student ID")
         else:
             input("Delete successfully")
+    
+    elif choice == 4:
+        os.system("cls")
+        std_ID = input("Enter the student ID to update from the list: ")
+        check = False
+        Update(student_list,std_ID,check)
+        if (check == True):
+            input("Update succesful")
+        else:
+            input("Student ID not found in the list")
+    
     elif choice == 5:
         while (1 != 0):
             os.system('cls')
