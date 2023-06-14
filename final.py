@@ -69,7 +69,7 @@ def display_students(stack):
     for sv in stack:
         stt +=1
         print("\t\t\t|%-5s|%-10s|%-23s|%-12s|%-13s|%-7s|" %
-              (str(stt),sv[0], sv[1], "  "+ sv[2], "   " + sv[3], str(sv[4])))
+              (str(stt),str(sv[0]), str(sv[1]), "  "+ str(sv[2]), "   " + str(sv[3]), str(sv[4])))
     print("\t\t\t+-----|----------+-----------------------+------------+-------------+-------*")
 
 # DELETE
@@ -78,19 +78,32 @@ def Delete(data, ID):
     return filter
 
 #UPDATE 
-def Update(data, ID, kt):
+def Update(data, ID):
+    row = []
     for sv in data:
         if sv[0] == ID:
-            row = []
             row.append(sv)
             display_students(row)
-            kt = True
-            sv[0] = str(input("Student ID: "))
-            sv[1] = str(input("Name: "))        
-            sv[2] = int(input("Year of birh: "))
-            sv[3] = float(input("Grade point average: "))
+            print("PLEASE ENTER THE INFORMATION YOU WANT TO UPDATE")
+            print("*If you want to keep it, please press Enter")
+            std_id = str(input("Student ID: "))
+            name = str(input("Name: ")) 
+            cl = str(input("Class: "))       
+            Yob = str(input("Year of birh: "))
+            Gpa = str(input("Grade point average: "))
+            if std_id != "":
+                sv[0] = std_id
+            if name != "":
+                sv[1] = name
+            if cl != "":
+                sv[2] = cl
+            if Yob !="":
+                sv[3] = int(Yob)
+            if Gpa != "":
+                sv[4] = float(Gpa)
+            return True
             break
-
+    return False        
 
 #SEARCH
 def search_name(name, st):
@@ -241,12 +254,11 @@ while (1 != 0):
     elif choice == 4:
         os.system("cls")
         std_ID = input("Enter the student ID to update from the list: ")
-        check = False
-        Update(student_list,std_ID,check)
-        if (check == True):
-            input("Update succesful")
-        else:
+        check = Update(student_list, std_ID)
+        if (check == False):
             input("Student ID not found in the list")
+        else:
+            input("Update succesful")
     
     elif choice == 5:
         while (1 != 0):
