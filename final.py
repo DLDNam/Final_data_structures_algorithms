@@ -6,7 +6,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 student_list = []
-#Chuan hao xau
+#Chuan hoa xau
 def CHX(st):
     st = st.title()
     st = st.strip()
@@ -164,7 +164,7 @@ def sort_name(data, compare_func):
                 greater.append(element)
         return sort_name(less, compare_func) + equal + sort_name(greater, compare_func)
 
-def compare_last_name(student1, student2):
+def compare_name(student1, student2):
     if student1[1] == student2[1]:
         return 0
     name1 = split_name(student1[1],-1)
@@ -296,7 +296,7 @@ while (1 != 0):
                 cl = input("Enter CLASS you want to search for: ").strip()
                 filtered_list = filter(lambda x: x[2] == cl, student_list)
                 filtered_list = list(filtered_list)
-                filtered_list = sort_name(filtered_list, compare_last_name)
+                filtered_list = sort_name(filtered_list, compare_name)
                 display_students(filtered_list)
                 input("ENTER")
             
@@ -314,7 +314,7 @@ while (1 != 0):
             if pick == 1:
                 student_list = quicksort_up(student_list)
                 display_students(student_list)
-                input("ENTER")
+                input("ENTER")      
             
             elif pick == 2:
                 student_list = quicksort_down(student_list)
@@ -322,7 +322,7 @@ while (1 != 0):
                 input("ENTER")
             
             elif pick == 3:
-                student_list = sort_name(student_list, compare_last_name)
+                student_list = sort_name(student_list, compare_name)
                 display_students(student_list)
                 input("ENTER")
             
