@@ -51,14 +51,28 @@ def menu():
     print("*****************************************************")
 
 # Them Sinh Vien
+# def add_student():
+#     student_id = str(input("Student ID: "))
+#     name = str(input("Name: "))
+#     Class = str(input("Class: "))
+#     year_brith = input("Year of birh: ")
+#     GPA = input("Grade point average: ")
+#     if (std_ID =="") or (name == "") or (Class == "") or (year_brith == "") or (GPA == ""):
+#         input("add failed student")
+#     else:
+#         student_list.append([student_id, CHX(name), Class, year_brith.strip(), GPA])
+
 def add_student():
     student_id = str(input("Student ID: "))
     name = str(input("Name: "))
     Class = str(input("Class: "))
-    year_brith = int(input("Year of birh: "))
-    GPA = float(input("Grade point average: "))
-    student_list.append([student_id, CHX(name), Class, year_brith.strip(), GPA])
-
+    year_brith = input("Year of birh: ")
+    GPA = input("Grade point average: ")
+    if (student_id == "") or (name == "") or (Class == "") or (year_brith == "") or (GPA == ""):
+        input("Add failed student")
+    else:
+        student_list.append([student_id, CHX(name), Class, year_brith.strip(), GPA])
+        input("Added successfully")
 # Display all of students
 def display_students(stack):
     print("\t\t\t+-----+----------+-----------------------+------------+-------------+-------*")
@@ -235,7 +249,6 @@ while (1 != 0):
     choice = int(input("Enter your choice: "))
     if choice == 1:
         add_student()
-        input("Added successfully")
 
     elif choice == 2:
         display_students(student_list)
