@@ -88,7 +88,7 @@ def Delete(data, ID):
             display_students(row) 
     return filter
 
-#UP DATE 
+#UPDATE 
 def Update(data, ID):
     row = []
     for sv in data:
