@@ -206,7 +206,6 @@ def subclass(data):
             lop.append(cl[2])
     return lop
 
-
 def AVG_GPA(data, Class):
     mean = [0 for i in range(len(Class))]
     dem = [0 for i in range(len(Class))]
