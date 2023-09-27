@@ -6,6 +6,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 student_list = []
+
 #Chuan hoa xau
 def CHX(st):
     st = st.title()
